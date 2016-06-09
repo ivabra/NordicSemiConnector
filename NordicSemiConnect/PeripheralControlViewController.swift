@@ -220,27 +220,12 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
       return
     }
     
-    guard let data = characteristic.value else {
+    guard let data = characteristic.value, result = String(data: data, encoding: NSASCIIStringEncoding) else {
       return
     }
     
-    let toprint: Any
-    switch data.length {
-    case sizeof(Double):
-      var doubleValue = 0.0
-      data.getBytes(&doubleValue, length: sizeof(Double))
-      toprint = doubleValue
-    case sizeof(Float):
-      var floatValue: Float = 0.0
-      data.getBytes(&floatValue, length: sizeof(Double))
-      toprint = floatValue
-    default:
-      toprint = data.description
-      break
-    }
-    
     dispatch_async(dispatch_get_main_queue()) { [weak self] in
-      self?.printInTextView(  "\(toprint)")
+      self?.printInTextView(result)
     }
   }
   
