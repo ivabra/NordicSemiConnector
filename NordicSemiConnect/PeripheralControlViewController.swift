@@ -216,7 +216,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
     
     if let error = error {
-      printInTextView("\(error.localizedDescription)")
+      printInTextView(error.localizedDescription)
       return
     }
     
