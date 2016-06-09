@@ -183,7 +183,6 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   
   
-  
   func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
     
     if let error = error {
@@ -205,17 +204,12 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   
   
-  
-  
   func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
     
     if let error = error {
       printInTextView("\(error.localizedDescription)")
     }
   }
-  
-  
-  
   
   
   
@@ -251,16 +245,10 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   }
   
   
-  
-  
-  
   func peripheralDidUpdateState() {
     updateToggleConnectionButtonState()
     updateListenCharacteristicButtonState()
   }
-  
-  
-  
   
   
   

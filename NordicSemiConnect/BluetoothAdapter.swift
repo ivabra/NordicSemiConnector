@@ -37,14 +37,9 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
   
   private var keyValueContextVar = 0
   
-  
   private var manager: CBCentralManager!
-
   private var delegates = [Int : WeakWrapper<BluetoothAdapterDelegate>]()
-  
   private(set) var discoveredPeripherals = Set<CBPeripheral>()
-  
-  
   
   
   init(identifier: String) {
@@ -59,8 +54,6 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
   
   
   
-  
-  
   func registerDelegate(delegate: BluetoothAdapterDelegate) {
     let id = ObjectIdentifier(delegate).hashValue
     delegates[id] = WeakWrapper(delegate)
@@ -70,8 +63,6 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
     let id = ObjectIdentifier(delegate).hashValue
     delegates.removeValueForKey(id)
   }
-  
-  
   
   
   func startScanning(allowDublicate: Bool = false) {
@@ -84,9 +75,7 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
     
     manager.scanForPeripheralsWithServices(nil, options: [CBCentralManagerScanOptionAllowDuplicatesKey : allowDublicate])
   }
-  
-  
-  
+
   
   func stopScanning() {
     manager.stopScan()
@@ -102,8 +91,7 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
   
   
   
-  
-  
+
   func connectPeripheral(peripheral: CBPeripheral) {
     manager.connectPeripheral(peripheral, options: [CBConnectPeripheralOptionNotifyOnConnectionKey : true, CBConnectPeripheralOptionNotifyOnNotificationKey : true, CBConnectPeripheralOptionNotifyOnDisconnectionKey : true])
   }
@@ -113,35 +101,22 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
   }
   
   
-  
-  
-  
-  
-  
+
   private func callDelegates(block: (adapter: BluetoothAdapter,  delegate: BluetoothAdapterDelegate) -> Void) {
     
-    guard !delegates.isEmpty else {
-      return
-    }
+    guard !delegates.isEmpty else { return }
     
     dispatch_async(dispatch_get_main_queue()) {[weak self] in
-      
-      guard let s = self where !s.delegates.isEmpty else {
-        return
-      }
-      
+      guard let s = self where !s.delegates.isEmpty else { return }
       for d in s.delegates.values {
         assert(d.value != nil, "You should unregister delegate before it deinitialization")
         block(adapter: s, delegate: d.value )
       }
-      
     }
   }
   
   
-  
-  
-  
+
   
   //MARK: CBCentralManagerDelegate
   
@@ -155,11 +130,13 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
     }
   }
   
+  
   func centralManagerDidUpdateState(central: CBCentralManager) {
     callDelegates { (adapter, delegate) in
       delegate.bluetoothAdapterDidChangeState?(adapter)
     }
   }
+  
   
   func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
     
@@ -169,6 +146,7 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
       delegate.bluetoothAdapter?(adapter, didChangeDiscoveredPeripherals: peripheral)
     }
   }
+  
   
   func centralManager(central: CBCentralManager, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
     callDelegates { (adapter, delegate) in
@@ -183,13 +161,12 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
     }
   }
   
+  
   func centralManager(central: CBCentralManager, didFailToConnectPeripheral peripheral: CBPeripheral, error: NSError?) {
     callDelegates { (adapter, delegate) in
       delegate.bluetoothAdapter?(adapter, didFailToConnectPeripheral: peripheral, error: error)
     }
   }
-  
-  
   
   
   
@@ -209,10 +186,7 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
         })
       }
     }
-    
   }
-  
-  
   
 }
 

@@ -74,10 +74,6 @@ class PeripheralsViewController: UITableViewController, BluetoothAdapterDelegate
   
   
   
-  
-  
-  
-  
   // MARK: BluetoothAdapterDelegate
   
   func bluetoothAdapterDidChangeScanningState(adapter: BluetoothAdapter) {
