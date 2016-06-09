@@ -8,20 +8,26 @@
 
 /* Begin PBXBuildFile section */
 		9F9DA08C1D08AFFA00EB4E3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA08B1D08AFFA00EB4E3E /* AppDelegate.swift */; };
-		9F9DA08E1D08AFFA00EB4E3E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA08D1D08AFFA00EB4E3E /* ViewController.swift */; };
 		9F9DA0911D08AFFA00EB4E3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9DA08F1D08AFFA00EB4E3E /* Main.storyboard */; };
 		9F9DA0931D08AFFA00EB4E3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9DA0921D08AFFA00EB4E3E /* Assets.xcassets */; };
 		9F9DA0961D08AFFA00EB4E3E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9DA0941D08AFFA00EB4E3E /* LaunchScreen.storyboard */; };
+		9F9DA09E1D08B14100EB4E3E /* BluetoothAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA09D1D08B14100EB4E3E /* BluetoothAdapter.swift */; };
+		9F9DA0A01D08C48F00EB4E3E /* PeripheralsViewControllerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA09F1D08C48F00EB4E3E /* PeripheralsViewControllerViewController.swift */; };
+		9F9DA0A21D08CA9100EB4E3E /* PeripheralControlViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA0A11D08CA9100EB4E3E /* PeripheralControlViewController.swift */; };
+		9F9DA0A41D08E71500EB4E3E /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA0A31D08E71500EB4E3E /* Constants.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		9F9DA0881D08AFFA00EB4E3E /* NordicSemiConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NordicSemiConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9DA08B1D08AFFA00EB4E3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		9F9DA08D1D08AFFA00EB4E3E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9F9DA0901D08AFFA00EB4E3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9F9DA0921D08AFFA00EB4E3E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		9F9DA0951D08AFFA00EB4E3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		9F9DA0971D08AFFA00EB4E3E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		9F9DA09D1D08B14100EB4E3E /* BluetoothAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothAdapter.swift; sourceTree = "<group>"; };
+		9F9DA09F1D08C48F00EB4E3E /* PeripheralsViewControllerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralsViewControllerViewController.swift; sourceTree = "<group>"; };
+		9F9DA0A11D08CA9100EB4E3E /* PeripheralControlViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeripheralControlViewController.swift; sourceTree = "<group>"; };
+		9F9DA0A31D08E71500EB4E3E /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,7 +61,10 @@
 			isa = PBXGroup;
 			children = (
 				9F9DA08B1D08AFFA00EB4E3E /* AppDelegate.swift */,
-				9F9DA08D1D08AFFA00EB4E3E /* ViewController.swift */,
+				9F9DA09F1D08C48F00EB4E3E /* PeripheralsViewControllerViewController.swift */,
+				9F9DA0A11D08CA9100EB4E3E /* PeripheralControlViewController.swift */,
+				9F9DA09D1D08B14100EB4E3E /* BluetoothAdapter.swift */,
+				9F9DA0A31D08E71500EB4E3E /* Constants.swift */,
 				9F9DA08F1D08AFFA00EB4E3E /* Main.storyboard */,
 				9F9DA0921D08AFFA00EB4E3E /* Assets.xcassets */,
 				9F9DA0941D08AFFA00EB4E3E /* LaunchScreen.storyboard */,
@@ -96,6 +105,11 @@
 				TargetAttributes = {
 					9F9DA0871D08AFFA00EB4E3E = {
 						CreatedOnToolsVersion = 7.3.1;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -135,8 +149,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9F9DA08E1D08AFFA00EB4E3E /* ViewController.swift in Sources */,
+				9F9DA0A01D08C48F00EB4E3E /* PeripheralsViewControllerViewController.swift in Sources */,
+				9F9DA0A21D08CA9100EB4E3E /* PeripheralControlViewController.swift in Sources */,
+				9F9DA09E1D08B14100EB4E3E /* BluetoothAdapter.swift in Sources */,
 				9F9DA08C1D08AFFA00EB4E3E /* AppDelegate.swift in Sources */,
+				9F9DA0A41D08E71500EB4E3E /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -288,6 +305,7 @@
 				9F9DA09C1D08AFFA00EB4E3E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
