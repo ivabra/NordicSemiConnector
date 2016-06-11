@@ -140,10 +140,11 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
   
   func centralManager(central: CBCentralManager, didDiscoverPeripheral peripheral: CBPeripheral, advertisementData: [String : AnyObject], RSSI: NSNumber) {
     
+    let exists = discoveredPeripherals.count
     discoveredPeripherals.insert(peripheral)
-    
+    let peripheralToNotify: CBPeripheral? = exists != discoveredPeripherals.count ? peripheral : nil
     callDelegates { (adapter, delegate) in
-      delegate.bluetoothAdapter?(adapter, didChangeDiscoveredPeripherals: peripheral)
+      delegate.bluetoothAdapter?(adapter, didChangeDiscoveredPeripherals: peripheralToNotify)
     }
   }
   
@@ -179,13 +180,12 @@ class BluetoothAdapter: NSObject, CBCentralManagerDelegate {
       return
     }
     
-    if object === manager {
-      if keyPath == "isScanning" {
-        callDelegates({ (adapter, delegate) in
-          delegate.bluetoothAdapterDidChangeScanningState?(adapter)
-        })
+    if object === manager && keyPath == "isScanning" {
+      callDelegates { (adapter, delegate) in
+        delegate.bluetoothAdapterDidChangeScanningState?(adapter)
       }
     }
+    
   }
   
 }

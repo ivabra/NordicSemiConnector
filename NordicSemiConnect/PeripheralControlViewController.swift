@@ -10,6 +10,12 @@ import UIKit
 import CoreBluetooth
 
 private let cellIdentifier = "cell"
+private let numberFormatter = { () -> NSNumberFormatter in
+  let f = NSNumberFormatter()
+  f.numberStyle  = NSNumberFormatterStyle.DecimalStyle
+  f.decimalSeparator = "."
+  return f
+}()
 
 class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, BluetoothAdapterDelegate {
   
@@ -20,9 +26,10 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   
   // MARK: IBOutlets
-  @IBOutlet weak var textView: UITextView!
-  @IBOutlet weak var toggleButton: UIBarButtonItem!
-  @IBOutlet weak var beginUpdatingButton: UIBarButtonItem!
+  @IBOutlet weak var toggleButton: UIButton!
+  @IBOutlet weak var beginUpdatingButton: UIButton!
+  @IBOutlet weak var gravityView: GravityView!
+  @IBOutlet weak var gravityLabel: UILabel!
   
   // MARK: Core Bluetooth
   var peripheral: CBPeripheral!
@@ -45,18 +52,12 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
     peripheral.delegate = self
     peripheral.addObserver(self, forKeyPath: "state", options: [.New, .Initial], context: &keyValueContextVar)
     title = peripheral.name
-    printInTextView(peripheral.name ?? "Unnamed")
     BluetoothAdapter.sharedAdapter().registerDelegate(self)
     
     updateToggleConnectionButtonState()
     updateListenCharacteristicButtonState()
     
-  }
-  
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
-    navigationController?.setToolbarHidden(false, animated: animated)
-  }
+  } 
   
   deinit {
     peripheral?.delegate = nil
@@ -96,7 +97,6 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   private func disconnect() {
     BluetoothAdapter.sharedAdapter().disconnectPeripheral(peripheral)
-    textView.text = peripheral.name
     updating = false
   }
   
@@ -122,32 +122,33 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   // MARK: Updating UI
   
-  func printInTextView(text: String) {
-    dispatch_async(dispatch_get_main_queue()) {[weak self] in
-      self?.textView.text! += "-> \(text)\n"
-    }
-  }
   
   func updateListenCharacteristicButtonState() {
-    beginUpdatingButton.title = updating ? "Stop" : "Start"
+    
+    beginUpdatingButton.setTitle((updating ? "vc.peripheral.stop" : "vc.peripheral.start").localized, forState: .Normal)
+    beginUpdatingButton.setTitleColor(updating ? .redColor() : nil, forState: .Normal)
     beginUpdatingButton.enabled = peripheral.state == .Connected
   }
   
   func updateToggleConnectionButtonState() {
+    let title: String
+    let enabled: Bool
     switch peripheral.state {
     case .Connected:
-      toggleButton.title = "Disconnect"
-      toggleButton.enabled = true
+      title   = "vc.peripheral.disconnect"
+      enabled = true
     case .Disconnected:
-      toggleButton.title = "Connect"
-      toggleButton.enabled = true
+      title   = "vc.peripheral.connect"
+      enabled = true
     case .Connecting:
-      toggleButton.title = "Connecting"
-      toggleButton.enabled = false
+      title   = "vc.peripheral.connecting"
+      enabled = false
     case .Disconnecting:
-      toggleButton.title = "Disconnecting"
-      toggleButton.enabled = false
+      title   = "vc.peripheral.disconnecting"
+      enabled = false
     }
+    toggleButton.setTitle(title.localized, forState: .Normal)
+    toggleButton.enabled = enabled
   }
   
   
@@ -155,14 +156,12 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   func bluetoothAdapter(adapter: BluetoothAdapter, didConnectPeripheral peripheral: CBPeripheral) {
     guard peripheral == self.peripheral else { return }
-    printInTextView("Connected")
   }
   
   func bluetoothAdapter(adapter: BluetoothAdapter, didDisconnectPeripheral peripheral: CBPeripheral, error: NSError?) {
     guard peripheral == self.peripheral else { return }
     service = nil
     characteristics = nil
-    printInTextView("Disconnected")
   }
   
   
@@ -185,8 +184,7 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   func peripheral(peripheral: CBPeripheral, didDiscoverCharacteristicsForService service: CBService, error: NSError?) {
     
-    if let error = error {
-      printInTextView("\(error.localizedDescription)")
+    if error != nil {
       return
     }
     
@@ -206,17 +204,13 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
   
   func peripheral(peripheral: CBPeripheral, didUpdateNotificationStateForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
     
-    if let error = error {
-      printInTextView("\(error.localizedDescription)")
-    }
   }
   
   
   
   func peripheral(peripheral: CBPeripheral, didUpdateValueForCharacteristic characteristic: CBCharacteristic, error: NSError?) {
     
-    if let error = error {
-      printInTextView(error.localizedDescription)
+    if error != nil {
       return
     }
     
@@ -224,8 +218,14 @@ class PeripheralControlViewController: UIViewController, CBPeripheralDelegate, B
       return
     }
     
+    
+    let value = numberFormatter.numberFromString(result)?.doubleValue ?? 1.0
+    
+  
     dispatch_async(dispatch_get_main_queue()) { [weak self] in
-      self?.printInTextView(result)
+      guard let s = self else  { return }
+      s.gravityLabel.text = String(format: "%0.2f", value)
+      s.gravityView.progress = CGFloat(value) / 2
     }
   }
   

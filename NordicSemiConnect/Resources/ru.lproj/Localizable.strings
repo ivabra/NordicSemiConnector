@@ -1,0 +1,28 @@
+/* 
+  Localizable.strings
+  NordicSemiConnect
+
+  Created by Ivan Brazhnikov on 12/06/16.
+  Copyright © 2016 Ivan Brazhnikov. All rights reserved.
+*/
+
+// Peripherals
+
+vc.peripherals.title    = "Устройства";
+vc.peripherals.search   = "Поиск...";
+vc.peripherals.stopped  = "Остановлено";
+
+vc.peripherals.message.enable_bluetooth           = "Для работы приложения необходимо включить Bluetooth";
+vc.peripherals.message.not_authorized             = "Приложению не предоставлены права доступа к Bluetooth";
+vc.peripherals.message.not_supported_bluetooth_le = "Устройство не поддерживает технологию Bluetooth LE";
+
+
+// Peripheral Control
+
+vc.peripheral.start         = "Старт";
+vc.peripheral.stop          = "Стоп";
+vc.peripheral.connect       = "Подключить";
+vc.peripheral.connecting    = "Подключение...";
+vc.peripheral.disconnect    = "Отсоединить";
+vc.peripheral.disconnecting = "Отсоединение...";
+

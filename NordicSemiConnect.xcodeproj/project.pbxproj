@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9F3118171D0CCE6100F777B3 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9F3118191D0CCE6100F777B3 /* Localizable.strings */; };
+		9F31181C1D0CCECD00F777B3 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F31181B1D0CCECD00F777B3 /* Utils.swift */; };
+		9F8EDD9E1D0C5BFA005496E1 /* ScanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8EDD9D1D0C5BFA005496E1 /* ScanningView.swift */; };
+		9F8EDDA01D0CBE51005496E1 /* GravityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F8EDD9F1D0CBE51005496E1 /* GravityView.swift */; };
 		9F9DA08C1D08AFFA00EB4E3E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9F9DA08B1D08AFFA00EB4E3E /* AppDelegate.swift */; };
 		9F9DA0911D08AFFA00EB4E3E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9F9DA08F1D08AFFA00EB4E3E /* Main.storyboard */; };
 		9F9DA0931D08AFFA00EB4E3E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9F9DA0921D08AFFA00EB4E3E /* Assets.xcassets */; };
@@ -18,6 +22,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9F3118181D0CCE6100F777B3 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9F31181A1D0CCE7200F777B3 /* ru */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = ru; path = ru.lproj/Localizable.strings; sourceTree = "<group>"; };
+		9F31181B1D0CCECD00F777B3 /* Utils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		9F8EDD9D1D0C5BFA005496E1 /* ScanningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScanningView.swift; sourceTree = "<group>"; };
+		9F8EDD9F1D0CBE51005496E1 /* GravityView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GravityView.swift; sourceTree = "<group>"; };
 		9F9DA0881D08AFFA00EB4E3E /* NordicSemiConnect.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NordicSemiConnect.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9F9DA08B1D08AFFA00EB4E3E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9F9DA0901D08AFFA00EB4E3E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -41,6 +50,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9F3118141D0CCD4D00F777B3 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				9F3118191D0CCE6100F777B3 /* Localizable.strings */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		9F8EDD9C1D0C5BBF005496E1 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				9F8EDD9D1D0C5BFA005496E1 /* ScanningView.swift */,
+				9F8EDD9F1D0CBE51005496E1 /* GravityView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		9F9DA07F1D08AFFA00EB4E3E = {
 			isa = PBXGroup;
 			children = (
@@ -60,6 +86,8 @@
 		9F9DA08A1D08AFFA00EB4E3E /* NordicSemiConnect */ = {
 			isa = PBXGroup;
 			children = (
+				9F3118141D0CCD4D00F777B3 /* Resources */,
+				9F8EDD9C1D0C5BBF005496E1 /* Views */,
 				9F9DA08B1D08AFFA00EB4E3E /* AppDelegate.swift */,
 				9F9DA09F1D08C48F00EB4E3E /* PeripheralsViewController.swift */,
 				9F9DA0A11D08CA9100EB4E3E /* PeripheralControlViewController.swift */,
@@ -69,6 +97,7 @@
 				9F9DA0921D08AFFA00EB4E3E /* Assets.xcassets */,
 				9F9DA0941D08AFFA00EB4E3E /* LaunchScreen.storyboard */,
 				9F9DA0971D08AFFA00EB4E3E /* Info.plist */,
+				9F31181B1D0CCECD00F777B3 /* Utils.swift */,
 			);
 			path = NordicSemiConnect;
 			sourceTree = "<group>";
@@ -105,6 +134,7 @@
 				TargetAttributes = {
 					9F9DA0871D08AFFA00EB4E3E = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 55BKHE3292;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -120,6 +150,7 @@
 			knownRegions = (
 				en,
 				Base,
+				ru,
 			);
 			mainGroup = 9F9DA07F1D08AFFA00EB4E3E;
 			productRefGroup = 9F9DA0891D08AFFA00EB4E3E /* Products */;
@@ -137,6 +168,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9F9DA0961D08AFFA00EB4E3E /* LaunchScreen.storyboard in Resources */,
+				9F3118171D0CCE6100F777B3 /* Localizable.strings in Resources */,
 				9F9DA0931D08AFFA00EB4E3E /* Assets.xcassets in Resources */,
 				9F9DA0911D08AFFA00EB4E3E /* Main.storyboard in Resources */,
 			);
@@ -152,14 +184,26 @@
 				9F9DA0A01D08C48F00EB4E3E /* PeripheralsViewController.swift in Sources */,
 				9F9DA0A21D08CA9100EB4E3E /* PeripheralControlViewController.swift in Sources */,
 				9F9DA09E1D08B14100EB4E3E /* BluetoothAdapter.swift in Sources */,
+				9F8EDD9E1D0C5BFA005496E1 /* ScanningView.swift in Sources */,
 				9F9DA08C1D08AFFA00EB4E3E /* AppDelegate.swift in Sources */,
+				9F8EDDA01D0CBE51005496E1 /* GravityView.swift in Sources */,
 				9F9DA0A41D08E71500EB4E3E /* Constants.swift in Sources */,
+				9F31181C1D0CCECD00F777B3 /* Utils.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
+		9F3118191D0CCE6100F777B3 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				9F3118181D0CCE6100F777B3 /* Base */,
+				9F31181A1D0CCE7200F777B3 /* ru */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
 		9F9DA08F1D08AFFA00EB4E3E /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -268,10 +312,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = NordicSemiConnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dantelab.NordicSemiConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -279,10 +325,12 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				INFOPLIST_FILE = NordicSemiConnect/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.dantelab.NordicSemiConnect;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
